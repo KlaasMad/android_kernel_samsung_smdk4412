@@ -13,6 +13,7 @@ obj-$(CONFIG_CPU_FREQ_GOV_CONSERVATIVE)	+= cpufreq_conservative.o
 obj-$(CONFIG_CPU_FREQ_GOV_INTERACTIVE)	+= cpufreq_interactive.o
 obj-$(CONFIG_CPU_FREQ_GOV_ADAPTIVE)	+= cpufreq_adaptive.o
 obj-$(CONFIG_CPU_FREQ_GOV_PEGASUSQ)	+= cpufreq_pegasusq.o
+obj-$(CONFIG_CPU_FREQ_GOV_ZZMOOVE)  += cpufreq_zzmoove.o
 obj-$(CONFIG_CPU_FREQ_GOV_HYPER)  += cpufreq_HYPER.o
 obj-$(CONFIG_CPU_FREQ_GOV_INTELLIDEMAND)  += cpufreq_intellidemand.o
 obj-$(CONFIG_CPU_FREQ_GOV_NEOX)    += cpufreq_neox.o
