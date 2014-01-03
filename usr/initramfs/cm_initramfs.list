@@ -50,6 +50,16 @@ file /res/customconfig/actions/usb-mode /home/gustavo/kernel/usr/galaxys2_initra
 file /res/customconfig/actions/gpu-freq  /home/gustavo/kernel/usr/galaxys2_initramfs_files/res/customconfig/actions/gpu-freq 755 0 0
 file /res/customconfig/actions/gpu-voltage  /home/gustavo/kernel/usr/galaxys2_initramfs_files/res/customconfig/actions/gpu-voltage 755 0 0
 file /res/customconfig/actions/gpu-thresh  /home/gustavo/kernel/usr/galaxys2_initramfs_files/res/customconfig/actions/gpu-thresh 755 0 0
+dir /modules 755 0 0
+file /modules/auth_rpcgss.ko /home/gustavo/kernel/usr/galaxys2_initramfs_files/modules/auth_rpcgss.ko 644 0 0
+file /modules/cifs.ko /home/gustavo/kernel/usr/galaxys2_initramfs_files/modules/cifs.ko 644 0 0
+file /modules/dhd.ko /home/gustavo/kernel/usr/galaxys2_initramfs_files/modules/dhd.ko 644 0 0
+file /modules/lockd.ko /home/gustavo/kernel/usr/galaxys2_initramfs_files/modules/lockd.ko 644 0 0
+file /modules/nfs.ko /home/gustavo/kernel/usr/galaxys2_initramfs_files/modules/nfs.ko 644 0 0
+file /modules/rpcsec_gss_krb5.ko /home/gustavo/kernel/usr/galaxys2_initramfs_files/modules/rpcsec_gss_krb5.ko 644 0 0
+file /modules/scsi_wait_scan.ko /home/gustavo/kernel/usr/galaxys2_initramfs_files/modules/scsi_wait_scan.ko 644 0 0
+file /modules/Si4709_driver.ko /home/gustavo/kernel/usr/galaxys2_initramfs_files/modules/Si4709_driver.ko 644 0 0
+file /modules/sunrpc.ko /home/gustavo/kernel/usr/galaxys2_initramfs_files/modules/sunrpc.ko 644 0 0
 dir /sbin 755 0 0
 dir /sbin/ext 755 0 0
 file /sbin/ext/efs-backup.sh /home/gustavo/kernel/usr/galaxys2_initramfs_files/sbin/ext/efs-backup.sh 755 0 0

@@ -40,29 +40,25 @@ if [ "$logger" == "off" ];then
   echo 0 > /sys/module/xt_qtaguid/parameters/debug_mask
 fi
 
-##### EFS Backup #####
-(
-# make sure that sdcard is mounted
-sleep 30
-/sbin/busybox sh /sbin/ext/efs-backup.sh
-) &
-
 #apply last soundgasm level on boot
 /res/uci.sh soundgasm_hp $soundgasm_hp
 
 # apply STweaks defaults
-export CONFIG_BOOTING=1
 /res/uci.sh apply
-export CONFIG_BOOTING=
 
 #usb mode
 /res/customconfig/actions/usb-mode ${usb_mode}
+
+# install kernel modules
+mount -o remount,rw /system
+rm /system/lib/modules/*.ko
+cp /modules/*.ko /system/lib/modules/
+chmod 0644 /system/lib/modules/*.ko
 
 ### Disables Built In Error Reporting
 setprop profiler.force_disable_err_rpt 1
 setprop profiler.force_disable_ulog 1
 
-mount -o remount,rw /system
 # gpu watch
 cp /res/gpuwatch /system/bin/gpuwatch
 chown root.system /system/bin/gpuwatch
@@ -71,10 +67,8 @@ chmod 0755 /system/bin/gpuwatch
 cp /res/gpucat /system/bin/gpucat
 chown root.system /system/bin/gpucat
 chmod 0755 /system/bin/gpucat
-mount -o remount,ro /system
 
 # install lights lib needed by BLN
-mount -o remount,rw /system
 rm /system/lib/hw/lights.exynos4.so
 cp /res/lights.exynos4.so /system/lib/hw/lights.exynos4.so
 chown root.root /system/lib/hw/lights.exynos4.so
