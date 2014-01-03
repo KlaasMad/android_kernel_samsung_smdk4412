@@ -42,13 +42,8 @@
 #endif
 
 #ifdef CONFIG_FB_S5P_MDNIE
-#ifdef CONFIG_MACH_KONA
-#include "s3cfb_mdnie_kona.h"
-#include "mdnie_kona.h"
-#else
 #include "s3cfb_mdnie.h"
 #include "mdnie.h"
-#endif
 #endif
 #ifdef CONFIG_HAS_WAKELOCK
 #include <linux/wakelock.h>
@@ -405,12 +400,12 @@ static ssize_t vsync_event_show(struct device *dev,
 	struct s3cfb_global *fbdev[1];
 	fbdev[0] = fbfimd->fbdev[0];
 
-	return snprintf(buf, PAGE_SIZE, "VSYNC=%llu",
+	return snprintf(buf, PAGE_SIZE, "%llu",
 			((fbdev[0] != 0) ?
 			ktime_to_ns(fbdev[0]->vsync_info.timestamp) : 0));
 }
 
-static DEVICE_ATTR(vsync_event, 0444, vsync_event_show, NULL);
+static DEVICE_ATTR(vsync_time, S_IRUGO, vsync_event_show, NULL);
 
 #if defined(CONFIG_FB_S5P_VSYNC_THREAD)
 static int s3cfb_wait_for_vsync_thread(void *data)
@@ -427,8 +422,8 @@ static int s3cfb_wait_for_vsync_thread(void *data)
 				fbdev->vsync_info.timestamp) &&
 				fbdev->vsync_info.active);
 
-		sysfs_notify(&fbdev->fb[pdata->default_win]->dev->kobj,
-				NULL, "vsync_event");
+		sysfs_notify(&fbdev->dev->kobj,
+				NULL, "vsync_time");
 	}
 
 	return 0;
@@ -562,25 +557,8 @@ void s3cfb_early_suspend(struct early_suspend *h)
 
 		mutex_lock(&fbdev[i]->output_lock);
 
-<<<<<<< HEAD
-		s3cfb_set_fifo_interrupt(fbdev[i], 1);
-		dev_info(fbdev[i]->dev, "fifo underrun trace\n");
-#endif
-#ifdef CONFIG_FB_S5P_MDNIE
-		/*  only FIMD0 is supported */
-		if (i == 0)
-#ifdef CONFIG_MACH_KONA
-			mdnie_setup();
-#else
-			s3c_mdnie_setup();
-#endif
-#endif
-		/* hw setting */
-		s3cfb_init_global(fbdev[i]);
-=======
 		if (pdata->backlight_off)
 			pdata->backlight_off(pdev);
->>>>>>> 508fc30... s3cfb: update 12
 
 		if (pdata->lcd_off)
 			pdata->lcd_off(pdev);
@@ -601,23 +579,7 @@ void s3cfb_early_suspend(struct early_suspend *h)
 		ret = s3cfb_display_off(fbdev[i]);
 
 #ifdef CONFIG_FB_S5P_MDNIE
-<<<<<<< HEAD
-		/*  only FIMD0 is supported */
-		if (i == 0) {
-			if (pdata->set_display_path)
-				pdata->set_display_path();
-
-			s3cfb_set_dualrgb(fbdev[i], S3C_DUALRGB_MDNIE);
-#ifdef CONFIG_MACH_KONA
-			mdnie_display_on(fbdev[i]);
-#else
-			s3c_mdnie_init_global(fbdev[i]);
-			s3c_mdnie_display_on(fbdev[i]);
-#endif
-		}
-=======
 		ret += mdnie_display_off();
->>>>>>> 508fc30... s3cfb: update 12
 #endif
 
 		if (ret > 0)
@@ -941,15 +903,7 @@ static int s3cfb_disable(struct s3cfb_global *fbdev)
 	ret = s3cfb_display_off(fbdev);
 
 #ifdef CONFIG_FB_S5P_MDNIE
-<<<<<<< HEAD
-#ifdef CONFIG_MACH_KONA
-		ret += mdnie_display_off();
-#else
-		ret += s3c_mdnie_display_off();
-=======
 	ret += mdnie_display_off();
->>>>>>> 508fc30... s3cfb: update 12
-#endif
 #endif
 
 	if (ret > 0)
@@ -1032,17 +986,6 @@ static int s3cfb_enable(struct s3cfb_global *fbdev)
 		}
 	}
 #endif
-<<<<<<< HEAD
-#ifdef CONFIG_MACH_KONA
-		mdnie_display_on(fbdev[i]);
-#else
-		s3c_mdnie_init_global(fbdev[i]);
-		set_mdnie_value(g_mdnie, 1);
-		s3c_mdnie_display_on(fbdev[i]);
-#endif
-#endif
-		s3cfb_display_on(fbdev[i]);
-=======
 
 #if defined(CONFIG_FB_S5P_VSYNC_THREAD)
 	mutex_lock(&fbdev->vsync_info.irq_lock);
@@ -1052,7 +995,6 @@ static int s3cfb_enable(struct s3cfb_global *fbdev)
 	}
 	mutex_unlock(&fbdev->vsync_info.irq_lock);
 #endif
->>>>>>> 508fc30... s3cfb: update 12
 
 	mutex_unlock(&fbdev->output_lock);
 
@@ -1334,8 +1276,8 @@ static int s3cfb_probe(struct platform_device *pdev)
 		if (ret < 0)
 			dev_err(fbdev[0]->dev, "failed to add sysfs entries\n");
 
-		ret = device_create_file(fbdev[i]->fb[pdata->default_win]->dev,
-					&dev_attr_vsync_event);
+		ret = device_create_file(fbdev[i]->dev,
+					&dev_attr_vsync_time);
 		if (ret < 0)
 			dev_err(fbdev[0]->dev, "failed to add sysfs entries\n");
 

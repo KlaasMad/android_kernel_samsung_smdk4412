@@ -1,14 +1,11 @@
 #ifndef __MDNIE_TABLE_H__
 #define __MDNIE_TABLE_H__
 
-<<<<<<< HEAD
 #include "mdnie_kona.h"
 
-=======
 #include "mdnie.h"
 
 /* 2013.06.27 */
->>>>>>> 508fc30... s3cfb: update 12
 
 static struct mdnie_backlight_value backlight_table[4] = {
 	{

@@ -28,11 +28,8 @@
 #include "s3cfb.h"
 #include "s5p-dsim.h"
 
-<<<<<<< HEAD
 #define NT71391_CHANGE_MINI_LVDS_FREQ_MIPI 1
 
-=======
->>>>>>> 508fc30... s3cfb: update 12
 #define POWER_IS_ON(pwr)	((pwr) <= FB_BLANK_NORMAL)
 
 struct lcd_info {
