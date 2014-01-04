@@ -27,7 +27,6 @@
 #include <linux/firmware.h>
 #include <mach/cpufreq.h>
 #include <linux/input/mt.h>
-#include <linux/boostpulse_core.h>
 
 #define OBJECT_TABLE_START_ADDRESS	7
 #define OBJECT_TABLE_ELEMENT_SIZE	6
@@ -1341,12 +1340,7 @@ static void report_input_data(struct mxt224_data *data)
 		}
 		if (touch_is_pressed && mxt224_touch_cb != NULL) {
 		/* tell cypress we had touch input */
-       (*mxt224_touch_cb)();
-       /* tell boostpulse we had touch input */
-       touchboost_ondemand();
-       touchboost_pegasusq();
-       touchboost_HYPER();
-       touchboost_NEOX();
+       (*mxt224_touch_cb)();   
      }
 	}
 }
