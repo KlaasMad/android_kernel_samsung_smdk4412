@@ -2,6 +2,7 @@
 <settingsTab name="CPU">
 <settingsPane description="CPU SETTINGS"
 name="CPU Scaling Settings">
+<checkbox description="Enable or Disable Boostpulse. This driver is generic and works for all governors. This boosts cpu frequency to 800mhz for 0,5 sec when scrolling or opening apps. Needs restart." name="Boostpulse" action="generic /tmp/boostpulse" label="Boostpulse"/>
 <spinner description="This will set the default CPU governor. Default CPU governor will only be set during early stages of booting (before init.d execution) and can be overriden by later scripts or apps." name="Default CPU Governor" action="generic /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor">
 <spinnerItem name="pegasusq" value="pegasusq"/>
 <spinnerItem name="zzmoove" value="zzmoove"/>
@@ -52,7 +53,7 @@ name="CPU Voltage 200 MHz" action="cpu-voltage 6" unit="mV" min="850" reversed="
 <checkbox description="Using ARCH_POWER enables the use of arm topology power functions instead of generic ones." name="ARCH_POWER" action="schedfeat ARCH_POWER" label="ARCH_POWER"/>
 </settingsPane>
 <settingsPane description="These settings control ZRAM (compressed memory). Keep in mind that zram gives you 'more' memory at the cost of CPU cycles, which means less battery. A restart is recommended when changing ZRAM settings. " name="ZRAM Settings">
-<seekBar description="0 = Off"
+<seekBar description="To turn ZRAM off set this to 0."
 name="ZRAM Size" action="zram_size 1" unit="MB" min="0" reversed="false" step="64" max="512"/>
 <checkbox description="This will make ZRAM behave like a swap partition. Run 'cat /proc/meminfo' to check current swap size. Don't disable this if your memory is almost full, free some memory before disabling." name="SWAP ON ZRAM" action="swap" label="SWAP ON ZRAM"/>
 </settingsPane>

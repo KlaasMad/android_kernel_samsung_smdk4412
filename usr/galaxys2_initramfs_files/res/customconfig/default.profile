@@ -1,3 +1,4 @@
+boostpulse=off
 scaling_governor=ondemand
 scaling_max_freq=1200000
 scaling_min_freq=200000
