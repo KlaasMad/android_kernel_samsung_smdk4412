@@ -9,4 +9,3 @@ else
 fi;
 	echo "1" > /sys/block/zram0/reset;
 	echo ${zram_size1}000000 > /sys/block/zram0/disksize;
-fi;
