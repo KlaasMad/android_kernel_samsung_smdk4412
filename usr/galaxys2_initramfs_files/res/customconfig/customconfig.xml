@@ -31,7 +31,7 @@ name="scaling_min_freq" action="generic /sys/devices/system/cpu/cpu0/cpufreq/sca
 </settingsPane>
 </settingsTab>
 <settingsTab name="CPU VOLTAGE">
-<settingsPane description="CPU Voltage Controls." name="CPU Voltage Controls">
+<settingsPane description="CPU Voltage Controls. WARNING: Too low voltages can cause freezes, and freezes can cause data corruption! Undervolting limits can vary from device to device." name="CPU Voltage Controls">
 <seekBar description="CPU Voltage for 1400 MHz. (Default: 1325 mV)"
 name="CPU Voltage 1400 MHz" action="cpu-voltage 1" unit="mV" min="1225" reversed="false" step="25" max="1425"/>
 <seekBar description="CPU Voltage for 1200 MHz. (Default: 1275 mV)"
@@ -52,6 +52,7 @@ name="CPU Voltage 200 MHz" action="cpu-voltage 6" unit="mV" min="850" reversed="
 <checkbox description="Using ARCH_POWER enables the use of arm topology power functions instead of generic ones." name="ARCH_POWER" action="schedfeat ARCH_POWER" label="ARCH_POWER"/>
 </settingsPane>
 <settingsPane description="These settings control misc kernel and ROM tweaks." name="MISC tweaks">
+<seekBar description="This controls vibration level. Default is 50%. Warning: levels above 75% might be dangerous." name="Vibration Level" action="generic /sys/class/timed_output/vibrator/pwm_value" unit="%" min="0" reversed="false" step="1" max="100"/>
 <spinner description="Set GPS tweaks based on your location. You can also copy your custom GPS configuration to /data/gps.conf then set to Off/Custom, your custom configuration will be applied at every boot and will survive rom flashing." name="GPS Tweaks" action="gps">
 <spinnerItem name="Off/Custom" value="0"/>
 <spinnerItem name="Africa" value="1"/>
@@ -83,7 +84,7 @@ name="Gamma Shift" action="generic /sys/class/lcd/panel/user_gamma_adjust" unit=
 </settingsPane>
 </settingsTab>
 <settingsTab name="BLN">
-<settingsPane description="BackLightNotification and Touchkey related Settings" name="BackLightNotification">
+<settingsPane description="BackLightNotification Settings" name="BackLightNotification">
 <checkbox description="BackLightNotification" name="BLN" action="generic /sys/class/misc/notification/notification_enabled" label="BLN"/>
 <spinner description="Notification timeout. 0: disabled" name="notification_timeout" action="generic /sys/class/misc/notification/notification_timeout">
 <spinnerItem name="Never timeout" value="0"/>
@@ -103,7 +104,12 @@ name="Gamma Shift" action="generic /sys/class/lcd/panel/user_gamma_adjust" unit=
 </spinner>
 <checkbox description="BLN Without Wakelock. You cannot use blinking or breathing effects together with this option. Enabling this will let the CPU sleep during BLN and save battery." name="BLNWW" action="generic /sys/class/misc/notification/blnww" label="BLNWW"/>
 <button description="Use this button to test bln. BLN will be active after you turn the screen off." name="Test BLN" action="test-bln" label="Test BLN"/>
-<spinner description="Led timeout. Select 'Use ROM defaults' if your ROM already has led timeout support (requires restart). You will need to use this setting on Samsung ROMs if you want to use led fadeout effect." name="led_timeout" action="generic /sys/devices/virtual/sec/sec_touchkey/led_timeout">
+</settingsPane>
+<settingsPane description="Touchkeys Settings. Disable any touchkeys configurations your ROM might have to use these." name="Touch Keys">
+<checkbox description="Selecting this will force disable touchkeys no matter what settings are set below." name="Force Disable Touchkeys" action="lights" label="Force Disable Touchkeys"/>
+<checkbox description="Selecting this will turn touckey leds on when you touch the screen." name="Leds on with touch" action="generic /sys/class/misc/notification/led_on_touch" label="Led on Touch"/>
+<checkbox description="Led fade in and out effects." name="Led Fade Effects" action="fade" label="Led Fade Effects"/>
+<spinner description="Led timeout settings." name="led_timeout" action="generic /sys/devices/virtual/sec/sec_touchkey/led_timeout">
 <spinnerItem name="No timeout" value="0"/>
 <spinnerItem name="1 sec" value="1"/>
 <spinnerItem name="3 sec" value="3"/>
@@ -111,10 +117,6 @@ name="Gamma Shift" action="generic /sys/class/lcd/panel/user_gamma_adjust" unit=
 <spinnerItem name="15 sec" value="15"/>
 <spinnerItem name="30 sec" value="30"/>
 <spinnerItem name="60 sec" value="60"/>
-</spinner>
-<spinner description="Disable or enable touchkey lights. Turn screen off/on after applying." name="Touchkey Lights" action="lights">
-<spinnerItem name="on" value="0"/>
-<spinnerItem name="off" value="1"/>
 </spinner>
 <seekBar description="Controls touchpad LED voltage level. (Default: 3000)" name="LED voltage level" action="generic /sys/devices/virtual/sec/sec_touchkey/touchkey_brightness" unit="mV" min="2500" reversed="false" step="50" max="3300"/>
 <checkbox description="Automatic touchpad LED voltage level. If this one is checked, touchpad LED voltage level will be ignored." name="Auto LED voltage" action="generic /sys/class/misc/notification/dyn_brightness" label="Auto Led Voltage"/>
@@ -155,7 +157,7 @@ name="Gamma Shift" action="generic /sys/class/lcd/panel/user_gamma_adjust" unit=
 <spinnerItem name="100MHz" value="100"/>
 </spinner>
 </settingsPane>
-<settingsPane description="GPU Voltage Levels: The defaults are 850, 850, 900 and 950." name="GPU Voltage Levels">
+<settingsPane description="GPU Voltage Levels: The defaults are 850, 850, 900 and 950. WARNING: Too low voltages can cause freezes, and freezes can cause data corruption! Undervolting limits can vary from device to device." name="GPU Voltage Levels">
 <seekBar description="GPU Voltage for the first step"
 name="GPU Voltage Level1" action="gpu-voltage 1" unit="mV" min="800" reversed="false" step="50" max="1400"/>
 <seekBar description="GPU Voltage for the second step"

@@ -7,10 +7,10 @@ fi
 mount -o remount,rw /
 
 case "${lights}" in
-  0)
+  off)
     echo "0" > /sys/devices/virtual/sec/sec_touchkey/force_disable
     ;;
-  1)
+  on)
     echo "1" > /sys/devices/virtual/sec/sec_touchkey/force_disable
     ;;
 esac;

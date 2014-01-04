@@ -113,7 +113,7 @@ static bool dyn_brightness = false;
 static bool blnww = false;
 
 static int led_fadein = 0, led_fadeout = 0;
-static int led_on_touch = 1;
+static int led_on_touch = 0;
 
 #if defined(CONFIG_TARGET_LOCALE_NAATT_TEMP)
 /* Temp Fix NAGSM_SEL_ANDROID_MOHAMMAD_ANSARI_20111224*/
