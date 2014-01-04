@@ -13,6 +13,7 @@ name="CPU Scaling Settings">
 <spinnerItem name="conservative" value="conservative"/>
 <spinnerItem name="userspace" value="userspace"/>
 <spinnerItem name="ondemand" value="ondemand"/>
+<spinnerItem name="interactive" value="interactive"/>
 <spinnerItem name="powersave" value="powersave"/>
 <spinnerItem name="performance" value="performance"/>
 </spinner>
