@@ -44,6 +44,7 @@ bln_effect=0
 blnww=on
 lights=on
 led_on_touch=off
+led_fadein=off
 led_fadeout=off
 led_timeout=0
 touchkey_brightness=3000

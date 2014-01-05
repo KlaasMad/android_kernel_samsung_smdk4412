@@ -466,7 +466,7 @@ static void led_fadeout_process(struct work_struct *work)
 	if(led_fadeout)
 	for (i = touchkey_voltage; i >= 2500; i -= 50) {
 		change_touch_key_led_voltage(i);
-		msleep(50);
+		msleep(40);
 	}
 	i2c_touchkey_write((u8 *)&status, 1);
 	//restore the voltage after turning the led off
@@ -485,7 +485,7 @@ static void led_fadein_process(struct work_struct *work)
 		i2c_touchkey_write((u8 *)&status, 1);
 		for (i = 2500; i <= touchkey_voltage; i += 50) {
 			change_touch_key_led_voltage(i);
-			msleep(50);
+			msleep(40);
 		}
 		mutex_unlock(&led_fadein_mutex);
 	}
