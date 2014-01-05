@@ -1,12 +1,12 @@
 #!/system/bin/sh
 
 if [ "a$2" != "a" ];then
-  boost=$2
+  cpu_boost=$2
 fi
 
 mount -o remount,rw /
 
-case "${boost}" in
+case "${cpu_boost}" in
   on)
     echo "800000" > /sys/module/cpu_boost/parameters/input_boost_freq
     echo "800000" > /sys/module/cpu_boost/parameters/sync_threshold
@@ -23,4 +23,4 @@ esac;
 
 mount -o remount,ro /
 
-echo $boost
+echo $cpu_boost
